@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>自定义指令</title>
+</head>
+<body>
+    <div id="app">
+        <!-- <p v-upper-text="message"></p> -->
+        <p v-color-swatch="color" v-upper-text="message"></p>
+        自动获取焦点：<input type="text" v-focus>
+    </div>
+    <script src="./node_modules/vue/dist/vue.js"></script>
+    <script>
+        Vue.directive("upper-text",{
+            bind:function(el){
+                el.style.fontWeight = 'bold'
+                el.style.fontSize = '30px'
+            },
+            inserted:function(el,binding){
+                el.innerHTML = binding.value.toUpperCase()
+                console.log(binding);
+            }
+        })
+
+        Vue.directive('color-swatch',function(el,binding){
+            el.style.backgroundColor = binding.value;
+            el.style.color = 'white';
+        })
+
+
+        new Vue({
+            el:'#app',
+            data:{
+                message:'mengxuegu,陪你学习伴你梦想',
+                color:'pink'
+            },
+            directives:{
+                'focus':{
+                    inserted:function(el){
+                        el.focus()
+                    }
+                }
+            }
+        })
+    </script>
+</body>
+</html>

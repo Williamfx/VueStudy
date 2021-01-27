@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>指令</title>
+    <style>
+        [v-cloak]{
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <!-- 在被Vue管理的模板入口节点上的作用v-cloak指令 -->
+    <div id="app" v-cloak>
+        <!-- 用QQ浏览器刷新页面时, {{}} 会有明显闪烁现象, 原因: 是浏览器从上往下依次解析, 会先把 {{ message }} 当作标签体直接先渲染, 然后 Vue 再进行解析 {{ message }} 变成了 message 的值: 'hello mengxuegu' -->
+        <h3>{{message}}</h3>
+        <h3>{{message}}</h3>
+        <h3 v-text="message"></h3>
+    </div>
+    <script src="./node_modules/vue/dist/vue.js"></script>
+    <script>
+        new Vue({
+            el:'#app',
+            data:{
+                message:'hello mengxuegu'
+            }
+        })
+    </script>
+</body>
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>动画效果</title>
+    <style>
+        /*显示过程中的动画效果*/
+        .bounce-enter-active{
+            animation: bounce-in 1s;
+        }
+        @keyframes bounce-in {
+            0%{
+                transform:scale(0);
+            }
+            50%{
+                transform:scale(1.5);
+            }
+            100%{
+                transform: scale(1);
+            }
+        }
+
+    </style>
+</head>
+<body>
+    <div id="example-2">
+        <button @click="show=!show">放大缩小动画</button>
+        <br>
+        <transition name="bounce">
+            <p v-if="show" style="display:inline-block">
+                陪你学习，伴你成长
+            </p>
+        </transition>
+    </div>
+
+    <script src="./node_modules/vue/dist/vue.js"></script>
+    <script>
+        new Vue({
+            el:'#example-2',
+            data:{
+                show:true
+            }
+        })
+    </script>
+</body>
+</html>

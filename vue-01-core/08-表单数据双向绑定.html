@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="demo">
+        <form action="#" @submit.prevent="submitForm">
+            姓名（文本）：<input type="text" v-model="name">
+            <br><br>
+
+            性别（单选按钮）：
+            <input type="radio" name="sex" value="1" v-model="sex">男
+            <input type="radio" name="sex" value="0" v-model="sex">女
+            <br><br>
+            
+            技能（多选框）：
+            <input type="checkbox" name="skills" value="java" v-model="skills">Java开发
+            <input type="checkbox" name="skills" value="vue" v-model="skills">Vue.js开发
+            <input type="checkbox" name="skills" value="python" v-model="skills">Python开发
+
+            城市（下拉框）：
+            <select name="citys" id="" v-model="city">
+                <!-- <option value="bj">北京</option>
+                <option value="sh">上海</option>
+                <option value="sj">深圳</option> -->
+                <option v-for="c in citys" :value="c.name">
+                    {{c.name}}
+                </option>
+            </select>
+            <br><br>
+
+            说明（多行文本）：<textarea name="" id="" cols="30" rows="5" v-model="desc"></textarea>
+            <br><br>
+            <button type="submit">提交</button>
+        </form>
+    </div>
+    <script src="./node_modules/vue/dist/vue.js"></script>
+    <script>
+        var vm = new Vue({
+            el:'#demo',
+            data:{
+                name:'第51号元素',
+                sex:'1',
+                skills:['python'],
+                citys:[
+                    {code:'bj',name:'北京'},
+                    {code:'sh',name:'上海'},
+                    {code:'sz',name:'深圳'}
+                ],
+                city:'北京',
+                desc:'元素周期表的第51号元素是锑，元素符号sb'
+            },
+            methods:{
+                submitForm:function(){
+                    alert(this.name+","+this.sex+","+this.skills+","+this.city+","+this.desc)
+                }
+            }
+        })
+    </script>
+</body>
+</html>

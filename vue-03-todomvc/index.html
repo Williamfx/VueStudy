@@ -16,14 +16,14 @@
 				<input @keyup.enter="addItem" class="new-todo" placeholder="What needs to be done?" autofocus>
 			</header>
 			<section class="main" v-show="items.length">
-				<input id="toggle-all" class="toggle-all" type="checkbox">
+				<input v-model="toggleAll" id="toggle-all" class="toggle-all" type="checkbox">
 				<label for="toggle-all">Mark all as complete</label>
 				<ul class="todo-list">
 					<li v-for="(item,index) in items" :key="item.id" :class="{completed:item.completed}">
 						<div class="View">
-							<input class="toggle" type="checkbox" v-model="item.completed">
+							<input class="toggle" id="toggle" type="checkbox" v-model="item.completed" >
 							<label for="">{{ item.content }}</label>
-							<button class="destroy" :value="item.id"></button>
+							<button class="destroy" :value="item.id" @click="removeItem(index)"></button>
 						</div>
 						<input class="edit" value="Create a TodoMVC template">
 					</li>
@@ -33,7 +33,7 @@
 			<!--修改：items.length值为0就是false-->
 			<footer class="footer" v-show="items.length">
 				<!-- This should be `0 items left` by default -->
-				<span class="todo-count"><strong>{{remaining}}</strong> item{{remaining === 1}} left</span>
+				<span class="todo-count"><strong>{{remaining}}</strong> item{{remaining === 1 ? '' : 's' }} left</span>
 				<!-- Remove this if you don't implement routing -->
 				<ul class="filters">
 					<li>

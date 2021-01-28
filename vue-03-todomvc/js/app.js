@@ -24,11 +24,30 @@
 			items
 		},
 		computed: {
+			//复选框计算属性（双向绑定）
+			toggleAll:{
+				get(){
+					console.log(this.remaining)
+					return this.remaining === 0;
+				},
+				set(newStatus){
+					this.items.forEach((item)=>{
+						item.completed = newStatus
+					})
+				}
+			},
 			remaining() {
 				return this.items.filter(item => !item.completed).length
 			}
 		},
 		methods: {
+			//移除任务项
+			removeItem(index){
+				//移除索引为index的一条记录
+				if (confirm("确定要删除该项吗")==true){
+					this.items.splice(index,1);
+				}
+			},
 			addItem(event) {
 				console.log('addItem', event.target.value)
 				//1.获取文本框输入的数据

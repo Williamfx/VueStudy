@@ -16,16 +16,16 @@
 				<input @keyup.enter="addItem" class="new-todo" placeholder="What needs to be done?" autofocus>
 			</header>
 			<section class="main" v-show="items.length">
-				<input v-model="toggleAll" id="toggle-all" class="toggle-all" type="checkbox">
+				<input v-model="toggleAll" id="toggle-all" class="toggle-all" type="checkbox" v-app-focus>
 				<label for="toggle-all">Mark all as complete</label>
 				<ul class="todo-list">
-					<li v-for="(item,index) in items" :key="item.id" :class="{completed:item.completed}">
+					<li v-for="(item,index) in items" :key="item.id" :class="{completed:item.completed,editing:item === currentItem}">
 						<div class="View">
 							<input class="toggle" id="toggle" type="checkbox" v-model="item.completed" >
-							<label for="">{{ item.content }}</label>
+							<label for="" @dblclick="toEdit(item)">{{ item.content }}</label>
 							<button class="destroy" :value="item.id" @click="removeItem(index)"></button>
 						</div>
-						<input class="edit" value="Create a TodoMVC template">
+						<input class="edit" :value="item.content" @keyup.esc="cancelEdit" @keyup.enter="finishEdit(item,index,$event)" @blur="finishEdit(item,index,$event)" v-todo-focus="item === currentItem">
 					</li>
 				</ul>
 			</section>

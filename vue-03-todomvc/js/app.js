@@ -4,7 +4,7 @@
 		{
 			id: 1,
 			content: 'vue.js',
-			completed:false //是否完成
+			completed:true //是否完成
 		},
 		{
 			id: 2,
@@ -42,6 +42,18 @@
 			}
 		},
 		computed: {
+			filterItems() {
+				switch (this.filterStatus) {
+					case "active"://过滤出未完成的数据
+						return this.items.filter(item => !item.completed)
+						break
+					case "completed"://过滤出已完成的数据
+						return this.items.filter(item => item.completed)
+						break
+					default://其他，返回所有数据
+						return this.items
+				}
+			},
 			//复选框计算属性（双向绑定）
 			toggleAll:{
 				get(){
@@ -125,4 +137,9 @@
 		//  当filterItems重新过滤出目标数据后，则自动同步更新到视图中
 		app.filterStatus = hash
 	}
+	//第一次访问页面时，调用一次让状态生效
+	window.onhashchange()
+
+
 })(Vue);
+

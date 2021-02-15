@@ -19,7 +19,7 @@
 				<input v-model="toggleAll" id="toggle-all" class="toggle-all" type="checkbox" v-app-focus>
 				<label for="toggle-all">Mark all as complete</label>
 				<ul class="todo-list">
-					<li v-for="(item,index) in items" :key="item.id" :class="{completed:item.completed,editing:item === currentItem}">
+					<li v-for="(item,index) in filterItems" :key="item.id" :class="{completed:item.completed,editing:item === currentItem}">
 						<div class="View">
 							<input class="toggle" id="toggle" type="checkbox" v-model="item.completed" >
 							<label for="" @dblclick="toEdit(item)">{{ item.content }}</label>
@@ -37,13 +37,13 @@
 				<!-- Remove this if you don't implement routing -->
 				<ul class="filters">
 					<li>
-						<a class="selected" href="#/">All</a>
+						<a class="{selected:filterStatus === 'all'}" href="#/">All</a>
 					</li>
 					<li>
-						<a href="#/active">Active</a>
+						<a class="{selected:filterStatus === 'active'}" href="#/active">Active</a>
 					</li>
 					<li>
-						<a href="#/completed">Completed</a>
+						<a class="{selected:filterStatus === 'completed'}" href="#/completed">Completed</a>
 					</li>
 				</ul>
 				<!-- Hidden if no completed items are left ↓ -->

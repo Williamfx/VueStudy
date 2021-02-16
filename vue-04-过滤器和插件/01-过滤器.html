@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <h3>过滤器接收多个参数：</h3>
+        <p>{{content | contentFilter}}</p>
+        <!-- <p v-bind:id="content | contentFilter"></p> -->
+        <input type="text" :value="content">
+        <h3>过滤器接收多个参数：</h3>
+        <p>{{vueScore | add(javaScore,pythonScore)}}</p>
+    </div>
+
+
+    <script src="./node_modules/vue/dist/vue.js"></script>
+    <script>
+
+        /*定义全局过滤器：过滤敏感数据*/
+        /*Vue.filter('contentFilter',function(value){
+            if(!value) return ''
+            return value.toUpperCase().replace('TMD','***').replace('SB','***')
+        })*/
+
+        new Vue({
+            el:'#app',
+            data:{
+                content:'小伙子，TMD就是个SB',
+                vueScore:80,
+                javaScore:95,
+                pythonScore:90
+            },
+            //局部过滤器
+            filters:{//不要少了s
+                contentFilter(value){
+                    if(!value) return ''
+                    return value.toUpperCase().replace('TMD','***').replace('SB','***')
+                },
+                add(num1,num2,num3){
+                    return num1 + num2 + num3
+                }
+            }
+        })
+    </script>
+</body>
+</html>

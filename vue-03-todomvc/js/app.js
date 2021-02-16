@@ -1,4 +1,15 @@
-(function (Vue) {
+(function (Vue) {//表示依赖了全局的Vue，其实不加也可以，只是更加明确点
+	var STORAGE_KEY = 'items-vuejs';
+
+	//本地存储数据对象
+	const itemStorage = {
+		fetch: function () {
+			return JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
+		},
+		save: function (items) {
+			localStorage.setItem(STORAGE_KEY, JSON.stringify(items));
+		}
+	}
 	//初始化任务
 	const items = [
 		{
@@ -27,10 +38,23 @@
 	var app = new Vue({
 		el: '#todoapp',
 		data: {
-			items,
-			currentItem: null,
-			filterStatus:'all'
+			// items, //对象属性简写，等价于items:items
+			items:itemStorage.fetch(),//获取本地数据进行初始化
+			currentItem: null,//上面不要少了逗号，接受当前点击的任务项
+			filterStatus:'all'//上面不要少了逗号，接受变化的状态值
 		},
+		//监听器
+		watch: {
+			//如果items发生改变，这个函数就会运行
+			items: {
+				deep: true,//发现对象内部值的变化，要在选项参数中指定deep:true.
+				handler: function (newItems, oldItems) {
+					//本地进行存储
+					itemStorage.save(newItems)
+				}
+			}
+		},
+
 		directives: {
 			//定义时不要在前面加v-,引用指令时要加上v-
 			'todo-focus': {

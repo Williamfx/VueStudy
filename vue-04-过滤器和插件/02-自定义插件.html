@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>14-自定义插件</title>
+</head>
+<body>
+    <div id="app">
+        <span v-my-directive="content"></span>
+    </div>
+    <script src="./node_modules/vue/dist/vue.js"></script>
+    <script src="js/plugins.js"></script>
+    <script>
+        //1.引入自定义插件MyPlugin
+        //如果报错：Uncaught ReferrenceError:MyPlugin is not defined
+        //解决方法：查看plugins.js是否引入，如果引入还是报错，检查js语法，特别是最后一行不要少了括号()
+        Vue.use(MyPlugin)
+
+        //2.创建Vue实例，模板中使用引用全局指令v-my-directive="content"
+        var vm = new Vue({
+            el:'#app',
+            data:{
+                content:'hello'
+            }
+        })
+
+        //3.调用自定义的全局方法，所以是Vue调用，不是vm
+        Vue.myGlovalMethod()
+
+        //4.调用Vue实例方法，所以是vm调用，不是Vue
+        vm.$myMethod('mengxuegu')
+
+    </script>
+</body>
+</html>

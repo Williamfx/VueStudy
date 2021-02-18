@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <component-a></component-a>
+        <!-- <component-b></component-b> -->
+    </div>
+    <script src="./node_modules/vue/dist/vue.js"></script>
+    <script>
+        /*
+            1.全局组件注册：
+            它们在注册之后可以用在任何新创建的Vue根实例(new Vue)的模板中
+
+            参数1：组件名
+              1.可使用驼峰或者横线分隔(kebab-case)命名方式
+              2.DOM中只能使用横线分隔方式进行引用组件
+        */
+        Vue.component('component-a',{
+            //template选项指定此组件的模板代码
+            template:'<div><h1>头部组件-{{ name }}</h1></div>',
+            //data必须是函数
+            data:function(){
+                return{
+                    name:'全局组件'
+                }
+            }
+        })
+
+        new Vue({
+            el:'#app'
+        })
+
+
+    </script>
+</body>
+</html>

@@ -2,10 +2,16 @@
     const template = `<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
                             <!--右边上半区域-->
                             <h1 class="page-header">Dashboard</h1>
-                            <dashboard></dashboard>
+                            <!-- 定义插槽 -->
+                            <slot name="dashboard"></slot>
+                            <!-- 通过自定义时间实现删除功能：
+                                @自定义事件名=时间监听函数
+                                在子组件dashboard中触发delete_hobby事件来调用deleteHobby函数
+                            -->
+                            <dashboard :hobbies="hobbies" @delete_hobby="deleteHobby"></dashboard>
                             <!--右边下半区域-->
-                            <h2 class="sub-header">Section title</h2>
-                            <home-list></home-list>
+                            <h2 class="sub-header">员工管理</h2>
+                            <home-list :emp-list="empList" :deleteEmp="deleteEmp"></home-list>
                         </div>`
     window.AppHome = {
         template,
@@ -26,12 +32,16 @@
             //而empList是初始化在当前这个数组里，所以删除的函数要定义在这个组件中
             deleteEmp(index) {
                 this.empList.splice(index,1)
+            },
+            //删除爱好
+            deleteHobby(index) {
+                this.hobbies.splice(index,1)
             }
         },
         components: {
             Dashboard,
             HomeList
-        }
+        },
     }
     
 })()

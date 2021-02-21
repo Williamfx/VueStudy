@@ -10,7 +10,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <item v-for="(emp,index) in empList" :key="emp.id" :emp="emp"/>
+                            <item v-for="(emp,index) in empList" :key="emp.id" :emp="emp" :deleteEmp="deleteEmp" :index="index"/>
                         </tbody>
                         </table>
                     </div>`

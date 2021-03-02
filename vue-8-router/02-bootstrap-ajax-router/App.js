@@ -1,4 +1,4 @@
-(function () {
+;(function () {
     const template = `<div id="app">
                             <!--头部导航区域-->
                         <app-navbar></app-navbar>
@@ -15,12 +15,12 @@
                         </div>
                     </div>`
     window.App = {
+        template,
         data() { 
             return {
                 title:'仪表盘'
             }
         },
-        template,
         components:{
           AppNavbar,
           AppLeaf,

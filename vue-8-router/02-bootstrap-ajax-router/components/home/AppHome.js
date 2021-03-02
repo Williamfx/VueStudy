@@ -30,7 +30,7 @@
         //生命周期钩子
         created() {
             axios.get('http://127.0.0.5500/vue-08-router/02-bootstrap-ajax-router/emp.json').then(response => {
-                console.log(response.data)
+                console.log(response.data,this)
                 this.empList = response.data
             }).catch(error => {
                 console.log(error.message)

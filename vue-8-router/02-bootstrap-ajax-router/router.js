@@ -1,4 +1,4 @@
-const { default: VueRouter } = require("vue-router")
+// const { default: VueRouter } = require("vue-router")
 
 ;(function () {
     window.router = new VueRouter({

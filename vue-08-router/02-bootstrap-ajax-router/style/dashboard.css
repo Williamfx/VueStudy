@@ -60,7 +60,9 @@ body {
   color: #fff;
   background-color: #428bca;
 }
+.router-link-exact-active {
 
+}
 
 /*
  * Home.vue
